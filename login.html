@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="img-container">
+            <img src="./assets/login-ask.png" alt="">
+        </div>
+        <div class="login-container">
+            <div class="login-heading">
+                <h3>Login</h3>
+                <p>Please enter your details below.</p>
+            </div>
+
+            <form id="login">
+                <div class="email">
+                    <label for="email-id">Email ID<span style="color: red; margin-left: 1px;">*</span></label>
+                    <input type="email" name="" id="email-id" required placeholder="xyz12@gmail.com">
+                </div>
+                <div class="password">
+                    <label for="pass">Password<span style="color: red;margin-left: 1px;">*</span></label>
+                    <div class="password-box">
+                        <input type="password" name="" id="pass" required placeholder="Password">
+                        <img src="./assets/hidden.png" alt="" id="eye-img">
+                    </div>
+                    <div id="password-feedback"></div>
+                </div>
+                <div class="login-button">
+                    <input type="submit" name="" id="login-btn" value="Login">
+                </div>
+                <div class="google-signup">
+                    <img src="./assets/google-icon.png" alt="">
+                    <p>Sign up with Google</p>
+                </div>
+            </form>
+
+            <div class="log-in">
+                <p>Dont't have an account? <a href="signup.html">Sign up?</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1291 @@
+
+/***************************** CSS for login and signup page *****************************************/
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins';
+    box-sizing: border-box; 
+
+}
+body{
+    background-color: #f5f5f5;
+    overflow-x: hidden;
+}
+.container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    /* gap: 300px; */
+    /* background: rgb(248, 248, 192); */
+}
+
+.img-container{
+    width: 510px;
+    height: 529px;
+    margin-bottom: 80px;
+}
+
+.login-container{
+    width: 600px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-right: 180px;
+}
+
+
+.login-container #login{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+    width: 100%;
+}
+.login-container #signup{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+    width: 100%;
+}
+.login-heading h3{
+    font-size: 34px;
+    font-weight: 900;
+}
+.login-heading p{
+    font-size: 16px;
+    color: gray;
+    font-weight: 500;
+    /* opacity: .9; */
+    /* color: rgba(0, 0, 0, 0.5); */
+    line-height: 21px;
+}
+
+.login-container #login .email, .password{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    align-items: flex-start;
+    font-weight: 600;
+}
+.login-container #signup .email, .password{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    align-items: flex-start;
+    font-weight: 600;
+}
+
+.login-container #login .email>input[type='email'] , .password> .password-box{
+    width: 100%;
+    height: 48px;
+    padding: 12px;
+    border-radius: 7px;
+    background-color: #fff;
+    border: 2px solid lightgray;
+    outline: 0;
+}
+.login-container #signup .email>input[type='email'] , .password> .password-box{
+    width: 100%;
+    height: 48px;
+    padding: 12px;
+    border-radius: 7px;
+    background-color: #fff;
+    border: 2px solid lightgray;
+    outline: 0;
+}
+
+.password-box{
+    display: flex;
+    align-items: center;
+    color: #555;
+}
+
+.password-box #pass {
+    width: 100%;
+    padding: 12px 0px;
+    border: 0;
+    outline: 0;
+}
+.password-box img {
+    width: 26px;
+    cursor: pointer;
+}
+
+.error{
+    color: red;
+    font-size: 12px;
+    font-weight: 100;
+    /* width: 103   %; */
+}
+.success{
+    color: green;
+    font-size: 12px;
+    font-weight: 100;
+
+}
+ 
+.login-container #login .login-button{
+    width: 100%;
+}
+
+.login-container #signup .login-button{
+    width: 100%;
+}
+.login-container #login .login-button input[type='submit']{
+    width: 100%;
+    padding: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 40px;
+    background-color: #F3BD00;
+    color: #222;
+    border: none;
+    cursor: pointer;
+}
+.login-container #signup .login-button input[type='submit']{
+    width: 100%;
+    padding: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 40px;
+    background-color: #F3BD00;
+    color: #222;
+    border: none;
+    cursor: pointer;
+}
+
+.login-container #login .google-signup{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    color: #5f5f5f;
+    width: 100%;
+    border: 2px solid lightgray;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 7px;
+    border: none;
+    box-shadow: 0px 8px 7px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.login-container #signup .google-signup{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    color: #5f5f5f;
+    width: 100%;
+    border: 2px solid lightgray;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 7px;
+    border: none;
+    box-shadow: 0px 8px 7px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.login-container #login .google-signup img{
+    width: 28px;
+}
+.login-container #signup .google-signup img{
+    width: 28px;
+}
+
+.login-container .log-in{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: grey;
+}
+.login-container .sign-up{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: grey;
+}
+.login-container .log-in a{
+    text-decoration: none;
+    font-weight: 700;
+    color: blue;
+}
+.login-container .sign-up a{
+    text-decoration: none;
+    font-weight: 700;
+    color: blue;
+}
+
+/***************************** CSS for signup page *****************************************/
+
+.signup-container {
+    width: 600px;
+    height: 600px;
+}
+
+.signup-container #signup{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+
+}
+
+.signup-container #signup .full-name {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    align-items: flex-start;
+    font-weight: 600;
+}
+
+.signup-container #signup .full-name>input[type='text'] {
+    width: 100%;
+    padding: 12px;
+
+    height: 48px;
+    border-radius: 7px;
+    border: 2px solid lightgray;
+    outline: 0;
+}
+
+.signup-container #signup .accept-tc {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #5f5f5f;
+    font-weight: 600;
+    gap: 5px;
+    font-size: 12px;
+}
+.accept-tc input{
+    width: 18px;
+    height: 18px;
+}
+.accept-tc label>a{
+    text-decoration: none;
+}
+
+/***************************** CSS for confirm-email page *****************************************/
+
+.container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    /* gap: 100px; */
+    /* background: rgb(248, 248, 192); */
+}
+
+.img-container{
+    width: 510px;
+    height: 529px;
+    margin-bottom: 80px;
+}
+.email-container{
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 33px;
+    padding-right: 167px;
+}
+
+.email-container .email{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.email-container .email>.email-heading{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.email .email-heading>img{
+    width: 39px;
+    height: 39px;
+    object-fit: cover;
+}
+
+.email .email-heading>h2{
+    font-size: 32px;
+    font-weight: 900;
+}
+
+.email-container .email>.email-link{
+    font-size: 16px;
+    color: #8E8E93;
+    display: inline-block;
+}
+.email>.email-link p a{
+    color: #0948B4;
+    text-decoration: none;
+}
+.email>.email-link p a>img{
+    box-sizing: border-box;
+    padding-left: 4px;
+    vertical-align: middle;
+} 
+
+.email-container .otp{
+    width: 100%;
+}
+.email-container .otp ul{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+.email-container .otp ul li{
+    font-size: 24px;
+    color: #1c1c1c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    list-style: none;
+    box-shadow: 0px 8px 16px 0px #1C1C1E1A;
+}
+
+.email-container .submit{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.email-container .submit button{
+    width: 100%;
+    background-color:#F3BD00;
+    border: none;
+    padding: 12px 24px 12px 24px;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.email-container .submit p{
+    font-size: 12px;
+    text-align: center;
+    font-weight: 500;
+    line-height: 15px;
+}
+.email-container .submit p span{
+    color: #0948B4;
+}
+
+
+/***************************** CSS for quiz-home page *****************************************/
+
+
+header{
+    width: 100vw;
+}
+
+.nav{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 70px 10px 40px;
+    border-bottom:2px solid lightgray ;
+}
+
+.nav .nav-left-section, .nav .nav-right-section{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+.nav .nav-left-section{
+    gap: 4rem;
+}
+.nav-left-section img{
+    height: 22px;
+    transition: margin-left 0.5s ease-in-out;
+}
+.nav-right-section .fetch-username , .nav-right-section .fetch-adminname {
+    font-size: 20px ;
+    font-weight: 500;
+    color: #1C1C1E;
+}
+.nav .account-img-container{
+    width:55px ;
+    height:55px ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.nav .account-img-container .account-img{
+    box-sizing: content-box;
+    width: 38px;
+    height: 38px;
+    border-radius: 50% ;
+    border: 0;
+    cursor: pointer;
+    box-shadow: 0px 2px 4px 0px #00000040;
+
+}
+.nav .account-img-container .account-img.clicked{
+    box-shadow: 0px 2px 10px 0px #00000040;
+}
+
+.account-img img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50% ;
+    object-fit: cover;
+}
+
+/* css for admin page starts here */
+
+.nav-right-section a {
+    text-decoration: none;
+    font-size: 20px ;
+    font-weight: 500;
+    color: #1C1C1E;
+}
+.highlight-sidebar-menuItem {
+    color: #F3BD00;
+    /* border-bottom: 2px solid #F3BD00; */
+}
+.nav-right-section #users-lists a:focus , .nav-right-section #quiz-lists a:focus {
+    color: rebeccapurple;
+}
+#welocome-heading{
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#welocome-heading h1{
+    color: #1c1c1e;
+}
+.logout-card .account-logo img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+/* css for admin page ends here */
+
+header .logout-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    position: absolute;
+    top: 60px;
+    right: 70px;
+    z-index: 2;
+    width: 240px;
+    padding: 20px 0;
+    /* border: 1px solid red; */
+    border-radius: .7rem;
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+header .logout-card.visible{
+    display: none;
+}
+
+.logout-card .account-logo-wrapper{
+    display: flex;
+    align-items: end;
+}
+.logout-card .account-logo-wrapper label i{
+    color: #000;
+    cursor: pointer;
+}
+
+header .logout-card .account-logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background-color: #F3BD00;
+    color: #fff;
+    font-size: 2.5rem;
+}
+
+.account-logo-wrapper .account-logo img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.logout-card .account-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.logout-card .account-details>.name{
+    font-size: 18px;
+}
+.logout-card .account-details>.email{
+    font-size: 13px;
+}
+header .logout-card button{
+    background-color: #F3BD00;
+    color: #2c2c2c;
+    font-size: 18px;
+    border: none;
+    padding: 3px 25px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+
+#quiz-main{
+    padding: 10px 30px;
+}
+.quiz-start .quiz-time{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #8E8E93;
+    font-size: 14px;
+}
+.quiz-start h2{
+    font-size: 28px;
+    font-weight: 700;
+    
+}
+.quiz-start ul{
+    margin-left: 20px;
+
+}
+.quiz-start ul li{
+    color: #8E8E93;
+    font-size: 14px;
+}
+
+.quiz-card{
+    width: 65vw;
+    /* height: 55vh; */
+    border:1px solid gray;
+    padding: 25px;
+    margin: 25px auto;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    justify-content: space-between;
+    gap: 20px;
+    border: 0;
+    box-shadow: 0px 13px 28px rgba(0,0,0,0.1);
+    /* background-color: #aaa; */
+    border-radius: 12px;
+    background-color: #FEFEFE;
+    ;
+}
+
+.quiz-card .quiz-catchy-lines{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:10px
+}
+.quiz-card .quiz-catchy-lines>img{
+    width: 100%;
+    border-radius:12px ;
+}
+
+.quiz-catchy-lines .quiz-card-text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+.quiz-catchy-lines .quiz-card-text>h2{
+    font-size: 28px;
+    font-weight: 700;
+}
+.quiz-catchy-lines .quiz-card-text>p{
+    color: #8E8E93;
+    font-size: 14px;
+    width: 340px;
+    text-align: center;
+}
+
+.quiz-card button{
+    width: 330px;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 40px;
+    background-color: rgb(240, 193, 24);
+    border: none;
+    color: #222;
+    cursor: pointer;   
+}
+
+
+
+.quiz-card #quiz-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    justify-content: space-between;
+    gap: 20px;
+}
+.quiz-card .personal-info{
+    width: 100%;
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-between;
+}
+.personal-info>.fullname , .personal-info>.emailid , .personal-info>.contactno{
+    width: 32%;
+}
+
+.personal-info label{
+    font-size: 14px;
+    font-weight: 400;
+}
+.personal-info input{
+    box-sizing: border-box;
+    font-size: 14px;
+    width: 100%;
+    padding: 10px;
+    border-radius:5px;
+    border: 1px solid #8E8E93;
+}
+
+#quiz-form input[type='submit']{
+    width: 55%;
+    padding: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 40px;
+    background-color: rgb(240, 193, 24);
+    border: none;
+    color: #222;
+    cursor: pointer;
+}
+
+
+
+/***************************** CSS for questions page *****************************************/
+
+.nav .account-img{
+    width: 38px;
+    height: 38px;
+    border-radius: 50% ;
+    border: 1px solid gray;
+    cursor: pointer;
+}
+
+
+#questions-main{
+    padding: 20px 40px;
+    /* height: 450px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap:25px
+}
+
+.ques-num{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap:10px
+}
+
+.ques-num h1{
+    font-size: 45px;
+    font-weight: 900;
+    color: #1c1c1e;
+}
+
+.ques-num .line-bar{
+    position: relative;
+}
+.ques-num .line-bar>#light-line{
+    width: 100%;
+    height: 14px;
+    background-color: #EBEBF0;
+    border-radius: 20px;
+}
+.ques-num .line-bar>#yellow-line{
+    position: absolute;
+    top: 0px;
+    width: calc(1*10%);
+    height: 14px;
+    background-color: rgb(240, 193, 24);
+    border-radius: 20px;
+}
+
+.ques-text{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 300px;
+    gap:10px
+}
+.ques-text h3{
+    font-size: 32px;
+    font-weight: 900;
+    color: #1c1c1e;
+}
+
+.ques-text .options{
+    padding-left: 0;
+    margin-left: 0;
+}
+.ques-text .options li{
+    list-style-position: inside;
+    width: fit-content;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1c1c1e;
+    margin-bottom: 13px;
+    cursor: pointer;
+    padding: 10px 15px; 
+}
+.ques-text .options li:hover{
+    font-size: 18px;
+    font-weight: 700;
+    color: #1c1c1e; 
+    padding: 10px 15px;
+    border-radius: 30px;
+    background-color: #EBEBF0;
+    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.selected{
+    background-color: rgb(240, 193, 24);
+    border-radius: 30px;
+
+}
+
+.ques-text .options li::marker{
+    font-weight: 700;
+    color: #000;
+}
+
+.ques-change{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 80px;
+    padding: 0 50px 0 20px;
+}
+.ques-change>.prev{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    color: gray;
+    font-size: 26px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.prev-visibility{
+    visibility: hidden;
+}
+.ques-change>.next{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    color: rgb(57, 57, 220);
+    font-size: 26px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/***************************** CSS for leaderboard page *****************************************/
+
+
+#leaderboard-main{
+    display: flex;
+    flex-direction: column;
+}
+.rank-status{
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    /* gap: 8px; */
+}
+.rank-status h1{
+    font-size: 32px;
+    font-weight: 700;
+    color: #1C1C1E;
+}
+/* .rank-status p{
+    font-size: 24px;
+    font-weight: 400;
+    color: #8E8E93;    
+} */
+
+#rank-profile-left{
+    position: absolute;
+    top: 217px;
+    left: calc(50% - (240px));
+    width: 150px;
+    height: 300px;
+    /* border: 1px solid #F4CE4A; */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.rank-profile .rank-marking{
+    position: absolute;
+    top: -34px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1C1C1E;
+}
+
+.rank-profile .profile-pic{
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+}
+#rank-profile-left .profile-pic{
+    border:6px solid #F4CE4A ;
+}
+
+.rank-profile .profile-pic img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+.rank-profile .score{
+    margin-top: -38px;
+    height: 75%;
+    width: 100%;
+    z-index: -1;
+    text-align: center;
+    padding-top: 55px;
+    border-radius: 12px 12px 0px 0px;
+}
+#rank-profile-left .score{
+    background-color: #F4CE4A;
+}
+
+.rank-profile .score>h3{
+    font-size: 22px;
+    font-weight: 700;
+    color: #1C1C1E;
+}
+.rank-profile .score>p{
+    font-size: 16px;
+    font-weight: 900;
+    color: #1C1C1E;
+}
+
+
+
+#rank-profile-middle{
+    position: absolute;
+    top: 180px;
+    left: calc(50% - (150px/2));
+    width: 150px;
+    height: 300px;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#rank-profile-middle .profile-pic{
+    border:6px solid #F3BD00 ;
+}
+#rank-profile-middle .score{
+    background-color: #F3BD00;
+}
+#rank-profile-middle #crown-img{
+    position: absolute;
+    top: -37px;
+    width: 50px;
+    /* width: 28px; */
+    /* font-size: 28px; */
+    /* font-weight: 700; */
+    /* color: #1C1C1E; */
+}
+
+#rank-profile-right{
+    position: absolute;
+    top: 246px;
+    left: calc(50% + (89px));
+    width: 150px;
+    height: 300px;
+    /* border: 1px solid blue; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#rank-profile-right .profile-pic{
+    border:6px solid #F7E296 ;
+}
+#rank-profile-right .score{
+    background-color: #F7E296;
+}
+
+.curve-container{
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+}
+.curve-container .curve-line{
+    position: absolute;
+    top: 313px;
+    left: -112px;
+    z-index: 2;
+    width: 114%;
+    height: 100px;
+    /* border: 1px solid black; */
+    border-radius: 50%/100px 100px 0 0;
+    border-color: black transparent transparent transparent;
+    box-shadow: 0px -10px 40px 0px #1C1C1E1A;
+    background-color: #fff;
+
+}
+
+footer{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    z-index: 2;
+    box-sizing: border-box;
+    /* border: 1px solid black; */
+    /* padding: 10px; */
+    background-color: #fff;
+
+}
+.rank-list{
+    /* display: none; */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 10px 40px 20px 40px;
+}
+.rank-list-individual{
+    box-shadow: 0px 8px 16px 0px #1C1C1E1A;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 40px;
+
+}
+
+.rank-list-individual .rankno-name{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.rank-list-individual .rankno-name>h4, .marks{
+    font-size: 24px;
+    font-weight: 700;
+    color: #1C1C1E;
+}
+.rank-list-individual .rankno-name>p{
+    font-size: 24px;
+    font-weight: 500;
+    color: #1C1C1E;
+}
+
+.hide-element{
+    /* display: none; */
+    visibility: hidden;
+}
+/***************************** CSS for Admin page *****************************************/
+.nav-left-section #sidebar_active{
+    cursor: pointer;
+    font-size: 22px;
+    color: #1c1c1e;
+    transition: transform 0.3s ease-in-out;
+}
+.sidebar-active-transform{
+    transform: rotate(270deg);
+}
+#main-section{
+    display: flex;
+    justify-content: flex-start;
+    min-height: 91vh;
+}
+.sidebar{
+    width: 280px;
+    margin-left: 0px;
+    padding: 10px 0px 0px 30px;
+    background-color: #fff;
+    box-sizing: border-box;
+    transition: margin-left 0.5s ease-in-out;
+}
+.sidebar #sidebar-header{
+    color: #878a99;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 10px 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+/* .sidebar #sidebar-menu{
+
+} */
+#sidebar-menu .menu-item{
+    padding: 12px 0px;
+    list-style: none;
+}
+#sidebar-menu .menu-item:hover{
+    cursor: pointer;
+    background-color: rgba(184, 184, 184, 0.05);
+}
+
+#sidebar-menu .menu-item i{
+    color: #878a99;
+    margin-right: 4px;
+}
+
+#sidebar-menu .menu-item a{
+    color: #878a99;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.sidebar-margin{
+    margin-left: -260px;
+}
+.sidebar-active-btn-margin{
+    margin-left: -240px;
+}
+
+/***************************** CSS for Admin-Users page *****************************************/
+#users-main{
+    width: 100%;
+}
+#users-table {
+    margin: 5px 10px ;
+    width: 100%;
+    /* min-height: 50%; */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px ;
+    box-shadow: 0 6px 30px rgba(182, 186, 203, 0.3);
+}
+
+/* for users-testlist page */
+#user-testlist{ 
+    margin: 20px 5px;
+}
+#users-table table , #user-testlist table{
+    /* margin: 0px auto; */
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border:1px solid #EAEAEA;  
+
+}
+
+#users-table table th ,  #user-testlist table th{
+    background-color: #f8f9fd;
+    color: #495057;
+}
+#users-table th, #users-table td , #user-testlist th , #user-testlist td{
+    border-bottom:1px solid #EAEAEA;
+    padding: 15px 20px;
+    text-align: center;
+}
+#users-table td , #user-testlist td{
+    color: #878a99;
+}
+
+#users-table .view-user-tests a , #user-testlist .view-user-test a{
+    text-decoration: none;
+    color: #6C5FFC;
+}
+
+/***************************** CSS for Admin-Quizzes page *****************************************/
+/* #quizzes-main{
+    margin: 0px auto;
+} */
+.quiz-container {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 5px 10px;
+    /* max-width: 800px ; */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+}
+.quiz-container h1{
+    margin: 20px 0;
+}
+/* #questions-list{
+    width: 80%;
+} */
+
+#add-question-btn{
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#add-question-btn:hover{
+    background-color: #45a049;
+}
+#question-template{
+    box-sizing: border-box;
+
+}
+
+.question-item{
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.question-item h3{
+    margin-bottom: 10px;
+}
+
+.question-item .input-group{
+    margin-bottom: 10px;
+}
+.input-group label {
+    font-size: 18px;
+    display: block;
+    margin-bottom: 5px;
+
+}
+.input-group textarea , .input-group input{
+    width: 100%;
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.question-item .actions{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.actions button{
+    margin-left: 5px;
+    padding: 1px 7px;
+    cursor: pointer;
+    border: 1px solid #1c1c1c;
+
+}
+.hidden{
+    display: none;
+}
+
+/***************************** CSS for Admin-Users-Quizlist page *****************************************/
+#users-quiz-section{
+    width: 100%;
+    /* height: fit-content; */
+    margin: 5px 10px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 6px 30px rgba(182, 186, 203, 0.3);
+}
+#users-quiz-section #user-details{
+    display: flex;
+    /* gap: 20px; */
+    justify-content: start;
+    padding-bottom: 8px;
+    border-bottom: 3px solid #EAEAEA;
+    color: #444050;
+    font-size: 18px;
+    font-weight: 900;
+}
+
+#user-details .user-details-name{
+    padding: 0 16px 0 0;
+    border-right: 3px solid #444050;
+} 
+#user-details .user-details-email{
+    padding-left: 16px;
+}
+
+#user-quiz-table{
+    margin-top: 30px;
+    border: 1px solid rgb(199, 192, 192);
+    padding: 5px;
+}
+#user-quiz-table table{
+    border-collapse: collapse;
+    border:1px solid #EAEAEA;
+    margin-bottom: 4px;  
+
+}
+#user-quiz-table .test-details{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 10px ;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgb(199, 192, 192) ;
+}
+.test-details h2, .test-details p , .test-details i{
+    font-size: 18px;
+    color: #444050;
+}
+
+.test-details .up-down-arrow{
+    padding: 2px;
+    cursor: pointer;
+}
+#user-quiz-table table th{
+    background-color: #f8f9fd;
+    color: #495057;
+    /* height: 100%; */
+    vertical-align: middle;
+}
+#user-quiz-table th, #user-quiz-table td{
+    border:1px solid #EAEAEA;
+}
+#user-quiz-table td{
+    color: #878a99;
+    width: 100%;
+
+}
+#user-quiz-table th, #user-quiz-table td{
+    padding: 10px 14px;
+    /* text-align: center; */
+}

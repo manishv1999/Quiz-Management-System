@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>            
+        <div class="nav" id="nav-fetching-user-details">
+            <img src="./assets/techpaathshala.svg" alt="techpaathshala logo">
+            <div class="nav-right-section">
+                <div class="fetch-username"></div>
+                <div class="account-img-container">
+                    <div class="account-img">
+                        <img src="./assets/account-img.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="logout-card visible">
+            <div class="account-logo-wrapper">
+                <div class="account-logo">
+                </div>
+                <div class="file-uploader">
+                    <label for="file-uploader"><i class="fa-solid fa-pen"></i></label>
+                    <input type="file" id="file-uploader" accept=".jpeg, .jpg, .png" style="display: none;">
+                </div>
+            </div>
+            <div class="account-details">
+                <p class="name"></p>
+                <p class="email"></p>
+            </div>
+            <button>Logout</button>
+        </div>
+    </header>
+    <main id="quiz-main">
+        <div class="quiz-start">
+            <h2>Let's Start the Quiz</h2>
+            <div class="quiz-time">
+                <i class="fa-regular fa-clock"></i>
+                <p>10 min</p>
+            </div>
+            <ul>
+                <li>disclaimers</li>
+                <li>disclaimers</li>
+            </ul>
+        </div>
+
+        <div class="quiz-card">
+            <div class="quiz-catchy-lines">
+                <img src="./assets/quiz_banner.png" alt="">
+                <div class="quiz-card-text">
+                    <h2>Catchy Line for Starting Quiz</h2>
+                    <p>When you're done, review your answers and See Your rank.</p>
+                </div>
+            </div>
+            <!-- <form id="quiz-form">
+                <div class="personal-info">
+                    <div class="fullname">
+                        <label for="name">Full Name<span style="color: red;">*</span></label>
+                        <input type="text" placeholder="Full Name" id="name-for-quiz" required>
+                    </div>
+                    <div class="emailid">
+                        <label for="email">Email<span style="color: red;">*</span></label>
+                        <input type="email" name="" id="email-for-quiz" placeholder="Email" required>
+                    </div>
+                    <div class="contactno">
+                        <label for="contactno">Contact No<span style="color: red;">*</span></label>
+                        <input type="number" placeholder="Contact No" id="contactno-for-quiz" required>
+                    </div>
+                </div>
+                <input type="submit" name="" id="personal-info-btn">
+            </form> -->
+            <button>Start Quiz</button>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

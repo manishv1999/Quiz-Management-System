@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+
+</head>
+
+<body>
+    <header>
+        <div class="nav" id="nav-fetching-user-details">
+            <img src="./assets/techpaathshala.svg" alt="techpaathshala logo">
+            <div class="nav-right-section">
+                <div class="fetch-username"></div>
+                <div class="account-img-container">
+                    <div class="account-img">
+                        <img src="./assets/account-img.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="logout-card visible">
+            <div class="account-logo-wrapper">
+                <div class="account-logo">
+                </div>
+                <div class="file-uploader">
+                    <label for="file-uploader"><i class="fa-solid fa-pen"></i></label>
+                    <input type="file" id="file-uploader" accept=".jpeg, .jpg, .png" style="display: none;">
+                </div>
+            </div>
+            <div class="account-details">
+                <p class="name"></p>
+                <p class="email"></p>
+            </div>
+            <button>Logout</button>
+        </div>
+    </header>
+    <main id="questions-main">
+        <div class="ques-num">
+            <h1><!--Question 1 of 10--></h1>
+            <div class="line-bar">
+                <div id="light-line"></div>
+                <div id="yellow-line"></div>
+            </div>
+        </div>
+        <div class="ques-text">
+            <!-- <h3></h3>
+            <ol class="options">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ol> -->
+        </div>
+        <div class="ques-change">
+            <div class="prev">
+                <i class="fa-solid fa-arrow-left"></i>
+                <p>Previous</p>
+            </div>
+            <div class="next">
+                <p>next</p>
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </div>
+    </main>
+
+    <script src="questionList.js"></script>
+    <script src="./script.js"></script>
+    <script>
+        // Creating usersTests to save questions given to user and their selected answer in LocalStorage
+        saveUserQuizDetails();
+
+        // for rendering of initial question
+        showQuestion(0);
+
+    </script>
+</body>
+
+</html>

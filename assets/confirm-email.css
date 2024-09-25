@@ -1,0 +1,120 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins';
+    /* box-sizing: border-box; */
+}
+body{
+    background-color: #f5f5f5;
+}
+.container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    /* gap: 100px; */
+    /* background: rgb(248, 248, 192); */
+}
+
+.img-container{
+    width: 510px;
+    height: 529px;
+    margin-bottom: 80px;
+}
+.email-container{
+    width: 434px;
+    display: flex;
+    flex-direction: column;
+    gap: 33px;
+    padding-right: 167px;
+}
+
+.email-container .email{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.email-container .email>.email-heading{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.email .email-heading>img{
+    width: 39px;
+    height: 39px;
+    object-fit: cover;
+}
+
+.email .email-heading>h2{
+    font-size: 32px;
+    font-weight: 900;
+}
+
+.email-container .email>.email-link{
+    font-size: 16px;
+    color: #8E8E93;
+    display: inline-block;
+}
+.email>.email-link p a{
+    color: #0948B4;
+    text-decoration: none;
+}
+.email>.email-link p a>img{
+    box-sizing: border-box;
+    padding-left: 4px;
+    vertical-align: middle;
+} 
+
+.email-container .otp{
+    width: 100%;
+}
+.email-container .otp ul{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+.email-container .otp ul li{
+    font-size: 24px;
+    color: #1c1c1c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    list-style: none;
+    box-shadow: 0px 8px 16px 0px #1C1C1E1A;
+}
+
+.email-container .submit{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.email-container .submit button{
+    width: 100%;
+    background-color:#F3BD00;
+    border: none;
+    padding: 12px 24px 12px 24px;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.email-container .submit p{
+    font-size: 12px;
+    text-align: center;
+    font-weight: 500;
+    line-height: 15px;
+}
+.email-container .submit p span{
+    color: #0948B4;
+}
+
+
+
+
+

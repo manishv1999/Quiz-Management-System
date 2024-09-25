@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="./leaderboard.css"> -->
+
+</head>
+<body>
+    <header>
+        <div class="nav" id="nav-fetching-user-details">
+            <img src="./assets/techpaathshala.svg" alt="techpaathshala logo">
+            <div class="nav-right-section">
+                <div class="fetch-username"></div>
+                <div class="account-img-container">
+                    <div class="account-img">
+                        <img src="./assets/account-img.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="logout-card visible">
+            <div class="account-logo-wrapper">
+                <div class="account-logo">
+                </div>
+                <div class="file-uploader">
+                    <label for="file-uploader"><i class="fa-solid fa-pen"></i></label>
+                    <input type="file" id="file-uploader" accept=".jpeg, .jpg, .png" style="display: none;">
+                </div>
+            </div>
+            <div class="account-details">
+                <p class="name"></p>
+                <p class="email"></p>
+            </div>
+            <button>Logout</button>
+        </div>
+    </header>
+    <main id="leaderboard-main">
+        <div class="rank-status">
+            <h1>Wow You Rank 1st</h1>
+            <!-- <p>Supporting Text</p> -->
+        </div>
+        <div class="rank-profile" id="rank-profile-middle">
+            <!-- <h3 class="rank-marking">#2</h3> -->
+             <img src="./assets/crown-img.svg" alt="" id="crown-img">
+            <div class="profile-pic">
+                <img src="./assets/rank-profile-middle.jpeg" alt="">
+            </div>
+            <div class="score">
+                <h3>Score</h3>
+                <p class="user-test-score">N.A.</p>
+            </div>
+        </div>
+        <div class="rank-profile" id="rank-profile-left" >
+            <h3 class="rank-marking">#2</h3>                
+            <div class="profile-pic">
+                <img src="./assets/rank-profile-left.jpeg" alt="">
+            </div>
+            <div class="score">
+                <h3>Score</h3>
+                <p class="user-test-score">N.A.</p>
+            </div>
+        </div>
+       
+        <div class="rank-profile" id="rank-profile-right">
+            <h3 class="rank-marking">#3</h3>                
+            <div class="profile-pic">
+                <img src="./assets/rank-profile-right.jpeg" alt="">
+            </div>
+            <div class="score">
+                <h3>Score</h3>
+                <p class="user-test-score">N.A.</p>
+            </div>
+        </div>
+    </main>
+    <div class="curve-container">
+        <div class="curve-line">
+            
+        </div>
+    </div>
+    <footer>
+        <div class="rank-list">
+            <div class="rank-list-individual">
+                <div class="rankno-name">
+                    <h4 class="last-three-row-ranking">#4</h4>
+                    <p class="user-test-name">Name</p>
+                </div>
+                <div class="marks user-test-score">N.A.</div>
+            </div>
+            <div class="rank-list-individual">
+                <div class="rankno-name">
+                    <h4 class="last-three-row-ranking">#5</h4>
+                    <p class="user-test-name">Name</p>
+                </div>
+                <div class="marks user-test-score">N.A.</div>
+            </div>
+            <div class="rank-list-individual">
+                <div class="rankno-name">
+                    <h4 class="last-three-row-ranking">#6</h4>
+                    <p class="user-test-name">Name</p>
+                </div>
+                <div class="marks user-test-score">N.A.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        loadLeaderboardPage();
+    </script>
+</body>
+</html>
