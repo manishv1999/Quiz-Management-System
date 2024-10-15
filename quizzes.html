@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quizzes</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
 
 </head>
+
 <body>
     <header>
         <div class="nav" id="nav-fetching-user-details">
             <div class="nav-left-section">
                 <img src="./assets/techpaathshala.svg" alt="techpaathshala logo">
                 <div id="sidebar_active">
-                    <i class="fa-solid fa-bars"></i>                
+                    <i class="fa-solid fa-bars"></i>
                 </div>
             </div>
 
@@ -43,7 +47,6 @@
                 <h2 id="sidebar-header">Menu</h2>
                 <ul id="sidebar-menu">
                     <li class="menu-item">
-                        <!-- <img src="./assets/home (1).png" alt=""> -->
                         <i class="fa-solid fa-house"></i>
                         <a href="admin.html">Home</a>
                     </li>
@@ -58,14 +61,28 @@
                 </ul>
             </div>
             <div class="quiz-container">
-                <h1>MCQ Question Lists</h1>
-                <div id="questions-list">
-                    <!-- Questions will be dynamically added here using LocalStorage -->
+                <h2>MCQ Question Lists</h2>
+                <div id="add-question-btn-wrapper">
+                    <button id="add-question-btn">Add new Question</button>
                 </div>
-                <button id="add-question-btn">Add new Question</button>
+                <div id="questions-list">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sr No</th>
+                                <th>Questions</th>
+                                <!-- <th colspan="4">Options</th>
+                                <th>Correct Option</th> -->
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>    
-        <!-- Question Form Template -->
+        </div>
         <div id="question-template" class="hidden">
             <div class="question-item">
                 <h3>Question</h3>
@@ -100,9 +117,161 @@
             </div>
         </div>
     </main>
-    <script src="script.js"></script>
+
+    <div id="add-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Create Question</h3>
+                <span class="close-icon"><i class="fa-solid fa-xmark"></i></span>
+            </div>
+            <form class="modal-form">
+                <div class="card-wrapper">
+                    <div class="form-group">
+                        <label for="question-text" class="ques-subtitle">Question <span class="input-required">*</span></label>
+                        <!-- <input type="text" id="question-text"> -->
+                        <textarea name="" id="question-text" class="ques-title" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="option1">Option 1 <span class="input-required">*</span></label>
+                        <input type="text" id="option1" class="options" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="option2">Option 2 <span class="input-required">*</span></label>
+                        <input type="text" id="option2" class="options" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="option3">Option 3 <span class="input-required">*</span></label>
+                        <input type="text" id="option3" class="options" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="option4">Option 4 <span class="input-required">*</span></label>
+                        <input type="text" id="option4" class="options " required>
+                    </div>
+                    <div class="form-group">
+                        <label for="correct-option">Correct Option <span class="input-required">*</span></label>
+                        <div class="select-box">
+                            <select name="" id="correct-option" required>
+                                <option value="option 1" class="option">option 1</option>
+                                <option value="option 2" class="option">option 2</option>
+                                <option value="option 3" class="option">option 3</option>
+                                <option value="option 4" class="option">option 4</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="submit-btn">
+                    <input type="submit" id="form-submit" value="Submit">
+                </div>
+            </form>
+        </div>    
+    </div>
+
+    <div id="edit-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Create Question</h3>
+                <span class="close-icon"><i class="fa-solid fa-xmark"></i></span>
+            </div>
+            <form class="edit-modal-form">
+                <div class="card-wrapper">
+                    <div class="form-group">
+                        <label for="question-text" class="ques-subtitle">Question <span class="input-required">*</span></label>
+                        <!-- <input type="text" id="question-text"> -->
+                        <textarea name="" id="question-text" class="ques-title" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="option1">Option 1 <span class="input-required">*</span></label>
+                        <input type="text" id="option1" class="edit-options" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="option2">Option 2 <span class="input-required">*</span></label>
+                        <input type="text" id="option2" class="edit-options" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="option3">Option 3 <span class="input-required">*</span></label>
+                        <input type="text" id="option3" class="edit-options" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="option4">Option 4 <span class="input-required">*</span></label>
+                        <input type="text" id="option4" class="edit-options " required>
+                    </div>
+                    <div class="form-group">
+                        <label for="correct-option">Correct Option <span class="input-required">*</span></label>
+                        <div class="select-box">
+                            <select name="" id="correct-option" required>
+                                <option value="option 1" class="edit-option">option 1</option>
+                                <option value="option 2" class="edit-option">option 2</option>
+                                <option value="option 3" class="edit-option">option 3</option>
+                                <option value="option 4" class="edit-option">option 4</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="edit-submit-btn">
+                    <input type="submit" id="edit-form-submit" value="Submit">
+                </div>
+            </form>
+        </div>    
+    </div>
+
+    <div id="delete-modal" class="modal hidden">
+        <div class="modal-content delete-modal-content" >
+            <div class="warning-img">
+                <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+            <div class="warning-title">
+                <h2>Are you sure?</h2>
+            </div>
+            <div class="warning-text">
+                You won't be able to revert this!
+            </div>
+            <div class="warning-actions">
+                <button class="delete-successs-btn">Delete</button>
+                <button class="delete-cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="view-modal" class="modal hidden" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Question Details</h3>
+                <span class="close-icon"><i class="fa-solid fa-xmark"></i></span>
+            </div>
+            <div class="view-modal-body">
+                <div class="card-wrapper">
+                    <div class="question-wrapper">
+                        <span class="ques-subtitle subtitle">Question 1</span>
+                        <h4 class="ques-title title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius iusto nesciunt excepturi neque vel labore, ducimus accusantium officia est. Molestiae totam vero inventore ipsam corrupti facere cupiditate maxime? Nihil, nobis.</h4>
+                    </div>
+                    <div class="option-group">
+                        <span class="opt-subtitle subtitle">Option 1</span>
+                        <h4 class="opt-title title">Lorem lpus</h4>
+                    </div>
+                    <div class="option-group">
+                        <span class="opt-subtitle subtitle">Option 2</span>
+                        <h4 class="opt-title title">Lorem lpus</h4>
+                    </div>
+                    <div class="option-group">
+                        <span class="opt-subtitle subtitle">Option 3</span>
+                        <h4 class="opt-title title">Lorem lpus</h4>
+                    </div>
+                    <div class="option-group">
+                        <span class="opt-subtitle subtitle">Option 4</span>
+                        <h4 class="opt-title title">Lorem lpus</h4>
+                    </div>
+                    <div class="correct-opt-wrapper">
+                        <span class="correct-opt-subtitle subtitle">Correct Option</span>
+                        <h4 class="correct-opt-title title">Lorem lpus</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/main.js"></script>
     <script>
         loadQuizzesPage();
     </script>
 </body>
+
 </html>

@@ -89,31 +89,48 @@ const passwordPattern =
 
 function validatePassword(passwordInput) {
   let passwordFeedback = document.querySelector("#password-feedback");
-  //logic to check length of password is pending
-  // if(passwordInput.value.length === 0){
-  //     passwordFeedback.style.display = 'none';
-  //     // return;
-  // }
-  // else{
-  //     passwordFeedback.style.display = 'default';
 
-  // }
   let password = passwordInput.value;
+  if (!password) {
+    console.log(passwordFeedback.innerText);
+    passwordFeedback.innerText = "";
+    return false;
+  }
+
   if (!passwordPattern.test(password)) {
     passwordFeedback.innerText =
       "Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character.";
     passwordFeedback.className = "error";
     return false;
   } else {
-    passwordFeedback.innerText = "Password is strong.";
+    passwordFeedback.innerText = "Password is OK.";
     passwordFeedback.className = "success";
     return true;
   }
 }
+
+const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+function validateEmailId(emailInput) {
+  let emailFeedback = document.querySelector("#email-feedback");
+  let email = emailInput.value;
+
+  if (!emailPattern.test(email)) {
+    emailFeedback.innerText = "Invalid Email";
+    emailFeedback.className = "error";
+  } else {
+    emailFeedback.innerText = "";
+  }
+}
+
 let signupForm = document.querySelector("#signup");
 if (signupForm) {
   // To check for password validation
   let passwordInput = document.querySelector("#pass");
+  let emailInput = document.querySelector("#email-id");
+
+  emailInput.addEventListener("input", (e) => {
+    validateEmailId(emailInput);
+  });
 
   passwordInput.addEventListener("input", (e) => {
     validatePassword(passwordInput);
@@ -371,6 +388,7 @@ function getRandomQuestions(array) {
 
 let questions = getRandomQuestions(questionsLists);
 
+
 let nextBtn = document.querySelector(".ques-change .next");
 let prevBtn = document.querySelector(".ques-change .prev");
 
@@ -392,7 +410,7 @@ function saveUserQuizDetails() {
     usersTests.unshift(userTest);
   }
   localStorage.setItem("usersTests", JSON.stringify(usersTests));
-  console.log("questionsMain saveUserQuizDetails");
+  // console.log("questionsMain saveUserQuizDetails");
 }
 
 function findTestUser(usersTests) {
@@ -481,7 +499,7 @@ function highlightCurrentSelectedAns(selectOptions, index) {
 let currentIndex = 0;
 
 function showQuestion(index) {
-  let quesNo = document.querySelector(".ques-num h1");
+  let quesNo = document.querySelector(".ques-number h1");
   let quesText = document.querySelector(".ques-text");
   let prevBtn = document.querySelector(".ques-change .prev");
   let nextBtnText = document.querySelector(".ques-change .next p");
@@ -512,7 +530,7 @@ function showQuestion(index) {
     prevBtn.classList.remove("prev-visibility");
   }
 
-  if (index === 9) {
+  if (index === questions.length-1) {
     nextBtnText.innerText = "Submit";
   } else {
     nextBtnText.innerText = "Next";
@@ -566,7 +584,7 @@ function submitQuizzes() {
 // for rendering of next question
 if (nextBtn) {
   nextBtn.addEventListener("click", () => {
-    if (currentIndex === 9) {
+    if (currentIndex === questions.length-1) {
       submitQuizzes();
     }
     if (currentIndex < questions.length - 1) {
@@ -588,6 +606,20 @@ if (prevBtn) {
 
 /***************************** JS for leaderboard page *****************************************/
 
+// Storing users list who have attempted test
+function saveTestAttemptedUsersLists(distinctUserTests) {
+  let testAttemptedUsersList =
+    JSON.parse(localStorage.getItem("testAttemptedUsersList")) || null;
+  // testAttemptedUsersList = [];
+  testAttemptedUsersList = distinctUserTests;
+
+  localStorage.setItem(
+    "testAttemptedUsersList",
+    JSON.stringify(testAttemptedUsersList)
+  );
+  console.log(distinctUserTests);
+}
+
 //sorting usersTests based on score for distinct usersTests
 function sortedUsersTests(usersTests) {
   // console.log("usersTests",usersTests)
@@ -607,8 +639,10 @@ function sortedUsersTests(usersTests) {
     }
   }
 
+  // Storing users list who have attempted test
+  saveTestAttemptedUsersLists(distinctUserTests);
+
   return distinctUserTests.sort((a, b) => b.score - a.score);
-  // console.log(distinctUserTests);
 }
 
 let leaderboard = document.querySelector("#leaderboard-main");
@@ -703,6 +737,7 @@ const loadLeaderboardPage = () => {
 };
 
 /***************************** JS for Admin page *****************************************/
+
 //For Admin page********************************************************
 
 let sidebarActiveBtn = document.querySelector("#sidebar_active");
@@ -760,31 +795,47 @@ function noOfTestGivenByUser(user) {
 }
 
 function latestTestScoreOfUser(user) {
+  console.log(user.emailId);
   let usersTests = JSON.parse(localStorage.getItem("usersTests"));
   // console.log(usersTests)
-  let userTest = usersTests.find(
-    (userTest) => user.emailId === userTest.user_email
-  );
+  let userTest = usersTests.find((userTest) => {
+    console.log(userTest.user_email);
+
+    return user.emailId === userTest.user_email;
+  });
   // console.log(userTest);
   if (userTest.score === undefined) {
     userTest.score = 0;
   }
 
+  console.log(userTest.score);
   return userTest.score;
 }
 
 //setting href to view more btn for each user
-function addLinkToViewMoreBtn(users) {
+function addLinkToViewMoreBtn(user, idx) {
   let usersViewBtns = document.querySelectorAll(
     "#users-table .view-user-tests a"
   );
   // console.log(usersViewBtns);
 
-  users.forEach((user, idx) => {
-    usersViewBtns[idx].href = `users-quizlist.html?name=${capitaliseWords(
+  let testAttemptedUsersList = JSON.parse(
+    localStorage.getItem("testAttemptedUsersList") 
+  ) || [];
+
+  let testAttemptedUsersListRev = testAttemptedUsersList.reverse();
+
+  let users = JSON.parse(localStorage.getItem("users"));
+
+  console.log(testAttemptedUsersListRev);
+  testAttemptedUsersListRev.forEach((testAttemptedUser, idx) => {
+    let user = users.find(
+      (user) => testAttemptedUser.user_email == user.emailId
+    );
+    // console.log(testAttemptedUser)
+    usersViewBtns[idx].href = `users-testlist.html?name=${capitaliseWords(
       user.name
     )}&email=${user.emailId}`;
-    // console.log(usersViewBtns)
   });
 }
 
@@ -792,29 +843,351 @@ let usersTable = document.querySelector("#users-table");
 let usersTableBody = document.querySelector("#users-table table tbody");
 // console.log(usersTableBody);
 
+function hasUserTestGiven(user) {
+  let usersTests = JSON.parse(localStorage.getItem("usersTests"));
+
+  if (usersTests.find((userTest) => user.emailId === userTest.user_email)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 function displayUsersQuizDetails() {
   let users = JSON.parse(localStorage.getItem("users"));
   // console.log(users)
+  let index = 0;
   users.forEach((user, idx) => {
-    let tr = document.createElement("tr");
-    tr.innerHTML = `<td>${idx + 1}</td>
-      <td>${capitaliseWords(user.name)}</td>
-      <td>${user.emailId}</td>
-      <td>${noOfTestGivenByUser(user)}</td>
-      <td>${latestTestScoreOfUser(user)}</td>
-      <td class='view-user-tests'><a href='#'>View Tests</a></td>
-      `;
-    usersTableBody.append(tr);
+    if (hasUserTestGiven(user)) {
+      console.log(user)
+      let tr = document.createElement("tr");
+      tr.innerHTML = `<td>${++index}</td>
+        <td>${capitaliseWords(user.name)}</td>
+        <td>${user.emailId}</td>
+        <td>${noOfTestGivenByUser(user)}</td>
+        <td>${latestTestScoreOfUser(user)}</td>
+        <td class='view-user-tests'><a href='#'>View Tests</a></td>
+        `;
+      usersTableBody.append(tr);
+      index;
+    }
   });
 
   //setting href to view more btn for each user
-  addLinkToViewMoreBtn(users);
+  addLinkToViewMoreBtn();
 }
+
 // displayUsersQuizDetails();
 
 //For Quizzes Page**********************************************************
+function saveQuestions(addModal, questions) {
+  let questionText = addModal.querySelector("#question-text").value;
+  let options = Array.from(addModal.querySelectorAll(".options")).map(
+    (option) => option.value
+  );
+  let correctOption = addModal.querySelector("#correct-option").value;
+
+  console.log(questionText, options);
+  let newQuestion = {
+    ques: questionText,
+    option: options,
+    correct_ans: correctOption,
+  };
+
+  questions.unshift(newQuestion);
+
+  localStorage.setItem('questions' , JSON.stringify(questions));
+  // console.log(questions);
+}
+
+// to show Add modal
+function showAddModal(addQuestionBtn , addModal , options){
+  addQuestionBtn.addEventListener("click", () => {
+    addModal.classList.remove("hidden");
+
+    // to populate correct_option options
+    let correctOptionLists = addModal.querySelectorAll(
+      "#correct-option option"
+    );
+
+    options.forEach((option, idx) => {
+      option.addEventListener('input' , (e) => {
+        correctOptionLists[idx].innerText = e.target.value;
+        correctOptionLists[idx].value = e.target.value;
+      })
+    });
+  });
+}
+
+function addQuestion(addQuestionBtn, addModal, questions) {
+  let closeModalBtn = document.querySelector("#add-modal .close-icon");
+  let modalForm = document.querySelector(".modal-form");
+
+  // let questionText = addModal.querySelector("#question-text").value;
+  let options = addModal.querySelectorAll(".options");
+  // let correctOption = addModal.querySelector("#correct-option");
+
+  // to show modal
+  showAddModal(addQuestionBtn , addModal , options);
+
+  // to hide modal
+  closeModalBtn.addEventListener("click", () => {
+    addModal.classList.add("hidden");
+  });
+
+  // on submitting added question
+  modalForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    saveQuestions(addModal, questions);
+    window.location.reload();
+  });
+}
+
+function handleDeleteModal(element , deleteModal){
+  let tbody = document.querySelector("#questions-list table tbody");
+
+  let deleteBtn = document.querySelector('.delete-successs-btn');
+  let cancelBtn = document.querySelector('.delete-cancel-btn');
+
+  console.log(element , deleteBtn);
+  let questionIndex = element.getAttribute('data-index');
+  console.log(questionIndex);
+
+  let questions = JSON.parse(localStorage.getItem("questions")) || [];
+
+  // to delete question
+  deleteBtn.addEventListener('click' , (e) => {
+    console.log(questionIndex)
+    questions.splice(questionIndex , 1);
+    
+    localStorage.setItem('questions' , JSON.stringify(questions));
+
+    window.location.reload();
+  })
+
+  // to cancel delete modal
+  cancelBtn.addEventListener('click' , (e) => {
+    deleteModal.style = 'display:none';
+  })
+}
+
+function deleteQuestion(){
+  let quizDeleteBtns = document.querySelectorAll('.quiz-delete');
+  let deleteModal = document.querySelector('#delete-modal');
+
+  quizDeleteBtns.forEach(element => {
+    element.addEventListener('click' , (e) => {
+      deleteModal.classList.remove('hidden');
+      deleteModal.style = 'display:flex';
+    
+      handleDeleteModal(e.target , deleteModal);
+    })
+  })
+}
+
+
+function populateViewModal(element){
+  let quesSubtitle = document.querySelector('.view-modal-body .ques-subtitle');
+  let quesTitle = document.querySelector('.view-modal-body .ques-title');
+  let optTitle = document.querySelectorAll('.view-modal-body .opt-title');
+  let correctOptTitle = document.querySelector('.view-modal-body .correct-opt-title');
+
+  let index = element.getAttribute('data-index');
+  let questions = JSON.parse(localStorage.getItem("questions")) || [];
+  console.log(questions)
+  let question = questions[index];
+  console.log(index)
+  quesSubtitle.innerText = `Question ${++index}`;
+  quesTitle.innerText = question.ques;
+
+  question.option.forEach((opt , idx) => {
+    optTitle[idx].innerText = opt; 
+  })
+
+  correctOptTitle.innerText = question.correct_ans;
+}
+
+
+function viewQuestion(){
+  let quizViewBtns = document.querySelectorAll('.quiz-view');
+  let viewModal = document.querySelector('#view-modal');
+  let closeViewModal = document.querySelector('#view-modal .close-icon');
+
+  // to display/popup view question modal
+  quizViewBtns.forEach(element => {
+    element.addEventListener('click' , (e) => {
+      viewModal.classList.remove('hidden');
+
+      // to populate view modal
+      console.log(e.target)
+      populateViewModal(e.target);
+    })
+  })
+
+  // to close view modal
+  closeViewModal.addEventListener('click' , (e) => {
+    // console.log(closeViewModal)
+    viewModal.classList.add('hidden');
+  })
+}
+
+let editQuestionIndex ;
+
+function populateEditModal(quizEditBtn , quesTitle , selectOptions , correctOptions){
+  let modalTitle = document.querySelector('#edit-modal .modal-title');
+  let quesSubtitle = document.querySelector('#edit-modal .ques-subtitle');
+
+  modalTitle.innerText = 'Edit Question';
+
+  editQuestionIndex = quizEditBtn.getAttribute('data-index');
+  let questions = JSON.parse(localStorage.getItem("questions")) || [];
+  let question = questions[editQuestionIndex];
+
+  quesSubtitle.innerHTML = `Question ${++editQuestionIndex} <span class="input-required">*</span>`;
+  quesTitle.innerText = question.ques;
+
+  question.option.forEach((opt , idx) => {
+    selectOptions[idx].value = opt; 
+  })
+
+  // populate value of correctOptions on change event
+  selectOptions.forEach((selectOption , idx) => {
+    selectOption.addEventListener('change' , () => {
+      correctOptions[idx].value = selectOption.value;
+      correctOptions[idx].innerText = selectOption.value;
+    })
+  })  
+
+  // populate value of correctOptions with default values(or after change event) of selectOptions
+  correctOptions.forEach((correctOpt , idx) => {
+    correctOpt.value = selectOptions[idx].value;
+    correctOpt.innerText = selectOptions[idx].value;
+  })
+}
+
+function savEditedQuestion(quesTitle , selectOptions , correctOpt){
+  let options = Array.from(selectOptions).map(opt => opt.value);
+  let editedQuestion = {
+    ques: quesTitle.value,
+    option: options,
+    correct_ans: correctOpt.value,
+  };
+
+  let questions = JSON.parse(localStorage.getItem("questions")) || [];
+  let questionIdx = --editQuestionIndex;
+
+  questions.forEach((question , idx) => {
+    if(questionIdx == idx){
+      questions[idx] = editedQuestion;
+      console.log(idx)
+    }
+  })
+
+  localStorage.setItem('questions' , JSON.stringify(questions));
+  console.log(questions);
+}
+
+function editQuestion(){
+  let editModal = document.querySelector('#edit-modal');
+  let editModalForm = document.querySelector(".edit-modal-form");
+  let quesTitle = document.querySelector('#edit-modal .ques-title');
+  let selectOptions = document.querySelectorAll('#edit-modal .edit-options');
+  let correctOptions = document.querySelectorAll('#edit-modal #correct-option .edit-option');
+  let correctOpt = document.querySelector('#edit-modal #correct-option');
+  let closeModalBtn = document.querySelector("#edit-modal .close-icon");
+
+
+  let quizEditBtns = document.querySelectorAll
+  ('.quiz-edit');
+
+  quizEditBtns.forEach((quizEditBtn , idx) => {
+    quizEditBtn.addEventListener('click' , (e) => {
+
+      // to show edit modal
+      editModal.classList.remove("hidden");
+
+      // to populate edit modal
+      populateEditModal(e.target , quesTitle , selectOptions , correctOptions);
+
+    })
+  })
+
+  // to hide modal
+  closeModalBtn.addEventListener("click", () => {
+    editModal.classList.add("hidden");
+  });
+
+  // on submitting edit modal form
+  editModalForm.addEventListener('submit' , (e) => {
+    e.preventDefault();
+
+    savEditedQuestion(quesTitle , selectOptions , correctOpt);
+    window.location.reload();
+  })
+
+  // 
+
+}
 
 let loadQuizzesPage = () => {
+  let questionsList = document.querySelector("#questions-list");
+  let addQuestionBtn = document.querySelector("#add-question-btn");
+  let addModal = document.querySelector("#add-modal");
+  let tbody = document.querySelector("#questions-list table tbody");
+
+  let questions = JSON.parse(localStorage.getItem("questions")) || [];
+  if (questions.length > 0) {
+    questions.forEach((question, idx) => {
+      let trow = document.createElement("tr");
+
+      let td1 = document.createElement("td");
+      td1.innerText = ++idx;
+      trow.appendChild(td1);
+
+      let td2 = document.createElement("td");
+      td2.innerText = question.ques;
+      trow.appendChild(td2);
+
+      question.option.forEach((opt) => {
+        let td3 = document.createElement("td");
+        td3.innerText = opt;
+
+        // trow.appendChild(td3);
+      });
+
+      let td4 = document.createElement("td");
+      td4.innerText = question.correct_ans;
+      // trow.appendChild(td4);
+
+      let td5 = document.createElement("td");
+      td5.innerHTML = `
+        <div class= 'quizzes-actions'>
+          <div class='quiz-view' data-index = '${idx-1}'><i class="fa-solid fa-eye" data-index = '${idx-1}'></i></div>
+          <div class='quiz-edit' data-index = '${idx-1}'><i class="fa-solid fa-pen" data-index = '${idx-1}'></i></div>
+          <div class='quiz-delete' data-index = '${idx-1}'><i class="fa-solid fa-trash" data-index = '${idx-1}'></i></div>
+        </div>
+      `;
+      trow.appendChild(td5);
+
+      tbody.appendChild(trow);
+    });
+  }
+
+  // to add new Question
+  addQuestion(addQuestionBtn, addModal, questions);
+
+  // to add a Question
+  deleteQuestion();
+
+  // to view a question
+  viewQuestion();
+
+   // to edit a question
+  editQuestion();
+
+};
+
+let loadQuizzesPage1 = () => {
   let questionsList = document.querySelector("#questions-list");
   let addQuestionBtn = document.querySelector("#add-question-btn");
   let questionTemplate = document.querySelector("#question-template").innerHTML;
@@ -916,32 +1289,49 @@ let loadQuizzesPage = () => {
 
 //For users-testlist Page**********************************************************
 
-function fetchUserTestFromUrl(userName, userEmail) {
+function fetchUserTestFromUrl() {
   let queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
 
   const name = urlParams.get("name");
   const email = urlParams.get("email");
+  const index = urlParams.get("index");
 
-  console.log(name,email)
+  console.log(name, email);
+  return { email, name, index };
+}
+
+function saveFetchedUserTestFromUrl(userName, userEmail) {
+  let { name, email } = fetchUserTestFromUrl();
   userName.innerText = name;
   userEmail.innerText = email;
-
-  return { email, name };
 }
 
-function addLinkToViewTestBtn(userTests){
-  let viewUserTestBtn = document.querySelectorAll('.view-user-test a');
-  console.log(viewUserTestBtn);
-
-  userTests.forEach( userTest => {
-    viewUserTestBtn.src = `users-test.html?`;
-  })
+function findNoOfCorrectAns(user) {
+  let questions = user.questions;
+  console.log(questions);
+  let count = 0;
+  questions.forEach((question) => {
+    if (question.correct_ans === question.selected_ans) {
+      count++;
+    }
+  });
+  return count;
 }
 
-function populateTestListTable(testlistTableBody , userDetails) {
+function addLinkToViewTestBtn(userTests, userDetails) {
+  let { name, email } = userDetails;
+  let viewUserTestBtns = document.querySelectorAll(".view-user-test a");
+  console.log(userTests);
+  userTests.forEach((userTest, idx) => {
+    viewUserTestBtns[
+      idx
+    ].href = `users-test.html?name=${name}&email=${email}&index=${idx}`;
+  });
+}
 
-  let {email} = userDetails;
+function populateTestListTable(testlistTableBody, userDetails) {
+  let { email } = userDetails;
 
   let usersTests = JSON.parse(localStorage.getItem("usersTests"));
 
@@ -954,8 +1344,9 @@ function populateTestListTable(testlistTableBody , userDetails) {
 
     trow.innerHTML = `
       <td>${idx + 1}</td>
-      <td>${userTest.quizEndTime}</td>
+      <td>${getTestDate(userTest.quizEndTime)}</td>
       <td>${userTest.score}</td>
+      <td>${findNoOfCorrectAns(userTest)}</td>
       <td class='view-user-test'><a href=''>View Test</a></td>
     `;
 
@@ -963,107 +1354,222 @@ function populateTestListTable(testlistTableBody , userDetails) {
   });
 
   //To add Link To ViewTest button
-  addLinkToViewTestBtn(userTests);
+  addLinkToViewTestBtn(userTests, userDetails);
 }
 
 const loadUsersTestlistPage = () => {
-
   let userName = document.querySelector("#user-details .user-details-name");
   let userEmail = document.querySelector("#user-details .user-details-email");
   let testlistTableBody = document.querySelector("#testlist-table tbody");
 
-  // To fetch User Details From Url
-  // let userDetails = fetchUserTestFromUrl(userName , userEmail);
+  // To save fetched User Details From Url
+  saveFetchedUserTestFromUrl(userName, userEmail);
+
+  let userDetails = fetchUserTestFromUrl();
 
   // To populate TestList Table
-  // populateTestListTable( testlistTableBody , userDetails );
+  populateTestListTable(testlistTableBody, userDetails);
+};
 
+//For users-test Page**********************************************************
 
-  function fetchAndLoadUserDetails() {
-    let queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const name = urlParams.get("name");
-    const email = urlParams.get("email");
-    // console.log(capitaliseWords(name),email);
-    userName.innerText = name;
-    userEmail.innerText = email;
+function getTestDate(testDate) {
+  let date = new Date(testDate);
 
-    let usersTests = JSON.parse(localStorage.getItem("usersTests"));
-    let userQuizTable = document.querySelector("#user-quiz-table");
-    let testDetailsHTML = document.querySelector(".test-details").innerHTML;
-    let quizlistTableHTML = document.querySelector(".quizlist-table").innerHTML;
-    // console.log(quizlistTableHTML);
-    // console.log(userQuizTable);
+  let day = String(date.getDate()).padStart(2, "0");
+  let month = String(date.getMonth() + 1).padStart(2, "0");
 
-    let testNo = 1;
-    usersTests.forEach((usersTest, idx) => {
-      if (email === usersTest.user_email) {
-        let testDetails = document.createElement("div");
-        testDetails.innerHTML = testDetailsHTML;
-        testDetails.classList.add("test-details");
-        userQuizTable.append(testDetails);
+  return `${day}-${month}-${date.getFullYear()}`;
+}
 
-        testDetails.querySelector("h2").innerText = `Test ${testNo}`;
-        if (usersTest.score == undefined) {
-          testDetails.querySelector("p").innerText = `Score 0`;
-        } else {
-          testDetails.querySelector("p").innerText = `Score ${usersTest.score}`;
+function calculateTestDuration(startTime, endTime) {
+  let t1 = new Date(startTime);
+  let t2 = new Date(endTime);
+
+  let timeDiff = Math.abs(t2 - t1);
+
+  let hours = Math.floor(timeDiff / (1000 * 60 * 60));
+  let minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+  let sec = Math.floor(((timeDiff % (1000 * 60 * 60)) % (1000 * 60)) / 1000);
+
+  return `${minutes}min ${sec}sec`;
+}
+
+function fetchAndLoadUserDetails(userName, userEmail) {
+  let { name, email, index } = fetchUserTestFromUrl();
+
+  userName.innerText = name;
+  userEmail.innerText = email;
+
+  let userQuizDetails = document.querySelector("#user-quiz-details");
+  let testDetails = document.querySelector(".test-details");
+  let quizTableHTML = document.querySelector(".quiz-table").innerHTML;
+  // console.log(quizTableHTML);
+  // console.log(userQuizDetails);
+  let usersTests = JSON.parse(localStorage.getItem("usersTests"));
+
+  let userTest = usersTests
+    .filter((userTest) => {
+      return email === userTest.user_email;
+    })
+    .find((user, idx) => idx == index);
+
+  testDetails.querySelector(".test-num").innerText = `Test ${++index}`;
+  testDetails.querySelector(
+    ".test-score"
+  ).innerText = `Score ${userTest.score}`;
+  testDetails.querySelector(
+    ".test-date"
+  ).innerText = `Test Date: ${getTestDate(userTest.quizEndTime)}`;
+  testDetails.querySelector(
+    ".test-duration"
+  ).innerText = `Time Taken: ${calculateTestDuration(
+    userTest.quizStartTime,
+    userTest.quizEndTime
+  )}`;
+
+  userTest.questions.forEach((question, idx) => {
+    let quizTable = document.createElement("table");
+    quizTable.innerHTML = quizTableHTML;
+    quizTable.classList.add("quiz-table");
+
+    quizTable.querySelector(".ques-num").innerText = `Question ${++idx}`; //edited
+    quizTable.querySelector(".ques-num-value").innerText = question.ques;
+
+    let options = quizTable.querySelectorAll(".options");
+
+    console.log(question.selected_ans);
+    question.option.forEach((opt, idx) => {
+      options[idx].innerText = opt;
+
+      //highlight the selected option
+      if (question.selected_ans === question.correct_ans) {
+        if (question.selected_ans === options[idx].innerText) {
+          let correctOptionWrapper = document.createElement("div");
+
+          let correctAns = document.createElement("p");
+          correctAns.textContent = options[idx].innerText;
+          correctOptionWrapper.appendChild(correctAns);
+
+          let iconContainer = document.createElement("div");
+          iconContainer.classList.add("correct-ans-icon");
+          iconContainer.innerHTML = `<i class="fa-solid fa-check"></i>`;
+          correctOptionWrapper.appendChild(iconContainer);
+
+          options[idx].innerText = "";
+
+          //to create option container for correct option text and correct option font
+          options[idx].appendChild(correctOptionWrapper);
+
+          options[idx].classList.add("correct-selected-ans");
         }
+      } else {
+        if (question.selected_ans === options[idx].innerText) {
+          let correctOptionWrapper = document.createElement("div");
 
-        let quizlistTableContainer = document.createElement("div");
-        quizlistTableContainer.classList.add("quizlist-table-container");
+          let correctAns = document.createElement("p");
+          correctAns.textContent = options[idx].innerText;
+          correctOptionWrapper.appendChild(correctAns);
 
-        usersTest.questions.forEach((question, idx) => {
-          let quizlistTable = document.createElement("table");
-          quizlistTable.innerHTML = quizlistTableHTML;
-          quizlistTable.classList.add("quizlist-table");
-          quizlistTableContainer.append(quizlistTable);
+          let iconContainer = document.createElement("div");
+          iconContainer.classList.add("wrong-ans-icon");
+          iconContainer.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
+          correctOptionWrapper.appendChild(iconContainer);
 
-          quizlistTable.querySelector(
-            ".ques-num"
-          ).innerText = `Question ${++idx}`;
-          quizlistTable.querySelector(".ques-num-value").innerText =
-            question.ques;
+          options[idx].innerText = "";
 
-          quizlistTable.querySelectorAll(".options").forEach((option, idx) => {
-            option.innerText = question.option[idx];
+          //to create option container for wrong option text and wrong option font
+          options[idx].appendChild(correctOptionWrapper);
 
-            //highlight the selected option
-            if (question.option[idx] == question.correct_ans) {
-              option.style.backgroundColor = "#f8f9fd";
-            }
-          });
-
-          quizlistTable.querySelector(".correct-opt").innerText =
-            question.correct_ans;
-        });
-
-        userQuizTable.append(quizlistTableContainer);
-
-        testNo++;
+          options[idx].classList.add("incorrect-selected-ans");
+        }
+        if (question.correct_ans === options[idx].innerText) {
+          options[idx].classList.add("default-correct-ans");
+        }
       }
     });
+    // quizTable.querySelectorAll(".options").forEach((option, idx) => {
+    //   option.innerText = question.option[idx];
 
-    let toggleArrows = userQuizTable.querySelectorAll(
-      ".test-details .up-down-arrow"
-    );
-    let quizlistTableContainer = document.querySelectorAll(
-      ".quizlist-table-container"
-    );
-    let arrow = document.querySelectorAll(".up-down-arrow i");
-    console.log(arrow);
-    toggleArrows.forEach((toggleArrow, idx) => {
-      toggleArrow.addEventListener("click", () => {
-        quizlistTableContainer[idx].classList.toggle("hidden");
-        // arrow[idx].className = 'fa-solid fa-angle-up';
+    //   if(question.selected_ans === question.correct_ans){
+    //     option.style.backgroundColor = "green";
+    //   }
 
-        if (arrow[idx].className === "fa-solid fa-angle-down") {
-          arrow[idx].className = "fa-solid fa-angle-up";
-        } else {
-          arrow[idx].className = "fa-solid fa-angle-down";
-        }
-      });
-    });
-  }
-  fetchAndLoadUserDetails();
+    //   //highlight the selected option
+    //   // if (question.option[idx] == question.correct_ans) {
+    //   //   option.style.backgroundColor = "#f8f9fd";
+    //   // }
+    // });
+
+    // quizTable.querySelector(".correct-opt").innerText = question.correct_ans;
+
+    userQuizDetails.appendChild(quizTable);
+  });
+
+  let testNo = 1;
+  usersTests.forEach((usersTest, idx) => {
+    // if (email === usersTest.user_email) {
+    //   // let testDetails = document.createElement("div");
+    //   // testDetails.innerHTML = testDetailsHTML;
+    //   // testDetails.classList.add("test-details");
+    //   // // userQuizDetails.append(testDetails);
+    //   // testDetails.querySelector("h2").innerText = `Test ${testNo}`;
+    //   // if (usersTest.score == undefined) {
+    //   //   testDetails.querySelector("p").innerText = `Score 0`;
+    //   // } else {
+    //   //   testDetails.querySelector("p").innerText = `Score ${usersTest.score}`;
+    //   // }
+    //   let quizlistTableContainer = document.createElement("div");
+    //   quizlistTableContainer.classList.add("quizlist-table-container");
+    //   usersTest.questions.forEach((question, idx) => {
+    //     let quizlistTable = document.createElement("table");
+    //     quizlistTable.innerHTML = testlistTableHTML;
+    //     quizlistTable.classList.add("quizlist-table");
+    //     quizlistTableContainer.append(quizlistTable);
+    //     quizlistTable.querySelector(
+    //       ".ques-num"
+    //     ).innerText = `Question ${++idx}`;
+    //     quizlistTable.querySelector(".ques-num-value").innerText =
+    //       question.ques;
+    //     quizlistTable.querySelectorAll(".options").forEach((option, idx) => {
+    //       option.innerText = question.option[idx];
+    //       //highlight the selected option
+    //       if (question.option[idx] == question.correct_ans) {
+    //         option.style.backgroundColor = "#f8f9fd";
+    //       }
+    //     });
+    //     quizlistTable.querySelector(".correct-opt").innerText =
+    //       question.correct_ans;
+    //   });
+    //   userQuizTable.append(quizlistTableContainer);
+    //   testNo++;
+    // }
+  });
+
+  // let toggleArrows = userQuizDetails.querySelectorAll(
+  //   ".test-details .up-down-arrow"
+  // );
+  // let quizlistTableContainer = document.querySelectorAll(
+  //   ".quizlist-table-container"
+  // );
+  // let arrow = document.querySelectorAll(".up-down-arrow i");
+  // console.log(arrow);
+  // toggleArrows.forEach((toggleArrow, idx) => {
+  //   toggleArrow.addEventListener("click", () => {
+  //     quizlistTableContainer[idx].classList.toggle("hidden");
+  //     // arrow[idx].className = 'fa-solid fa-angle-up';
+
+  //     if (arrow[idx].className === "fa-solid fa-angle-down") {
+  //       arrow[idx].className = "fa-solid fa-angle-up";
+  //     } else {
+  //       arrow[idx].className = "fa-solid fa-angle-down";
+  //     }
+  //   });
+  // });
+}
+let loadUsersTestPage = () => {
+  let userName = document.querySelector("#user-details .user-details-name");
+  let userEmail = document.querySelector("#user-details .user-details-email");
+
+  fetchAndLoadUserDetails(userName, userEmail);
 };

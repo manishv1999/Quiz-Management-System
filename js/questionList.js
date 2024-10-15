@@ -74,26 +74,6 @@ let questionsList = [
       option: ["Linked", "Embedded", "Inline", "Orthogonal"],
       correct_ans: "Orthogonal",
     },
-    // {
-    //   ques: ,
-    //   option: [, , ,],
-    //   correct_ans: ,
-    // },
-    // {
-    //   ques: ,
-    //   option: [, , ,],
-    //   correct_ans: ,
-    // },
-    // {
-    //   ques: ,
-    //   option: [, , ,],
-    //   correct_ans: ,
-    // },
-    // {
-    //   ques: ,
-    //   option: [, , ,],
-    //   correct_ans: ,
-    // },
   ];
   
   //for storing questions in localStorage
